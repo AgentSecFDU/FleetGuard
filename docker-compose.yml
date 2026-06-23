@@ -49,5 +49,54 @@ services:
       redis:
         condition: service_healthy
 
+  # ── Device Sidecars (3 simulated employee machines) ─────────────
+  sidecar-alice:
+    build:
+      context: .
+      dockerfile: sidecar/Dockerfile
+    container_name: fleetguard-sidecar-alice
+    environment:
+      - FG_CONTROL_CENTER_URL=http://api:8000
+      - FG_ENROLLMENT_TOKEN=fget_demo-token-for-local-dev-0000000000
+      - FG_DEVICE_ID=fg-dev-alice-001
+      - FG_HOSTNAME=alice-macbook
+      - FG_USERNAME=alice
+      - FG_OS=macOS
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  sidecar-bob:
+    build:
+      context: .
+      dockerfile: sidecar/Dockerfile
+    container_name: fleetguard-sidecar-bob
+    environment:
+      - FG_CONTROL_CENTER_URL=http://api:8000
+      - FG_ENROLLMENT_TOKEN=fget_demo-token-for-local-dev-0000000000
+      - FG_DEVICE_ID=fg-dev-bob-001
+      - FG_HOSTNAME=bob-thinkpad
+      - FG_USERNAME=bob
+      - FG_OS=Linux
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  sidecar-carol:
+    build:
+      context: .
+      dockerfile: sidecar/Dockerfile
+    container_name: fleetguard-sidecar-carol
+    environment:
+      - FG_CONTROL_CENTER_URL=http://api:8000
+      - FG_ENROLLMENT_TOKEN=fget_demo-token-for-local-dev-0000000000
+      - FG_DEVICE_ID=fg-dev-carol-001
+      - FG_HOSTNAME=carol-desktop
+      - FG_USERNAME=carol
+      - FG_OS=Windows
+    depends_on:
+      - api
+    restart: unless-stopped
+
 volumes:
   pgdata:

@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  # ── Infrastructure ──────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: fleetguard-postgres
+    environment:
+      POSTGRES_USER: fleetguard
+      POSTGRES_PASSWORD: fleetguard
+      POSTGRES_DB: fleetguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fleetguard"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: fleetguard-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── FleetGuard Control Center ───────────────────────────────────
+  api:
+    build: .
+    container_name: fleetguard-api
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://fleetguard:fleetguard@postgres:5432/fleetguard
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=fleetguard-demo-secret-key-not-for-production
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:

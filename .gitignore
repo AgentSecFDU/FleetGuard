@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+*.egg
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
+.pytest_cache/
+.ruff_cache/
+*.log
+*.db
+file::memory:
+
+# Node (stray root installs)
+node_modules/
+package.json
+package-lock.json
+
+# Frontend
+frontend/dist/
+frontend/node_modules/

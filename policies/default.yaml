@@ -1,0 +1,63 @@
+policy_id: default
+version: 1
+name: "Default Policy"
+description: "Default policy with essential safety rules"
+updated_at: "2026-06-23T10:00:00Z"
+default_action: allow
+rules:
+  - id: block-dangerous-shell
+    description: "Block dangerous shell patterns"
+    when:
+      event_type: before_tool_call
+      tool_category: shell
+      command_matches:
+        - "curl .*\\| sh"
+        - "wget .*\\| sh"
+        - "rm -rf /"
+        - "chmod \\+x .* && .*"
+        - "bash -c"
+        - "python -c"
+        - "nc -e"
+    action: block
+    severity: critical
+
+  - id: approve-sensitive-file-read
+    description: "Require approval before reading sensitive files"
+    when:
+      event_type: before_tool_call
+      tool_category: file
+      path_matches:
+        - "**/.ssh/**"
+        - "**/.aws/credentials"
+        - "**/.config/**/credentials*"
+        - "**/Cookies"
+    action: require_approval
+    severity: high
+
+  - id: block-external-egress-after-untrusted-input
+    description: "Block outbound data transfer after untrusted input"
+    when:
+      input_provenance: untrusted_web
+      tool_category:
+        - network
+        - message
+        - browser
+      destination_trust: external
+    action: block
+    severity: critical
+
+  - id: require-approval-plugin-install
+    description: "Require approval before installing non-enterprise plugin or skill"
+    when:
+      event_type: before_install
+      source_not_in:
+        - enterprise_registry
+        - local_allowlist
+    action: require_approval
+    severity: high
+
+scope:
+  devices: []
+  users: []
+  groups:
+    - default

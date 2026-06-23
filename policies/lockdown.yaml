@@ -1,0 +1,26 @@
+policy_id: lockdown
+version: 1
+name: "Lockdown Policy"
+description: "Applied when a device is quarantined"
+updated_at: "2026-06-23T10:00:00Z"
+default_action: block
+allow:
+  - event_upload
+  - heartbeat
+  - policy_sync
+  - read_only_chat
+  - local_status
+deny:
+  - shell
+  - file_write
+  - message_send
+  - browser_submit
+  - plugin_install
+  - skill_install
+  - memory_write
+rules: []
+scope:
+  devices: []
+  users: []
+  groups:
+    - lockdown

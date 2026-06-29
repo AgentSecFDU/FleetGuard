@@ -1,7 +1,7 @@
 """Dashboard aggregation service."""
 
 from datetime import datetime, timedelta, timezone
-from sqlalchemy import select, func, and_
+from sqlalchemy import select, func, and_, case
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from fleetguard.models.device import Device
@@ -96,7 +96,7 @@ async def get_top_risky_devices(db: AsyncSession, limit: int = 10) -> list[dict]
             func.avg(Event.risk_score).label("avg_score"),
             func.count(Event.id).label("total"),
             func.sum(
-                func.case((Event.severity == "critical", 1), else_=0)
+                case((Event.severity == "critical", 1), else_=0)
             ).label("critical_count"),
         )
         .group_by(Event.device_id)

@@ -13,6 +13,7 @@ import {
   Input,
   Popconfirm,
 } from 'antd';
+import { ReloadOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import { useParams, useNavigate } from 'react-router-dom';
 import { devicesApi } from '../api/endpoints';
@@ -226,14 +227,25 @@ export default function DeviceDetailPage() {
       key: 'events',
       label: 'Recent Events',
       children: (
-        <Table<Event>
-          rowKey="event_id"
-          columns={eventColumns}
-          dataSource={events}
-          loading={eventsLoading}
-          scroll={{ x: 900 }}
-          pagination={{ pageSize: 20, showSizeChanger: true }}
-        />
+        <div>
+          <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'flex-end' }}>
+            <Button
+              icon={<ReloadOutlined />}
+              loading={eventsLoading}
+              onClick={fetchEvents}
+            >
+              Refresh
+            </Button>
+          </div>
+          <Table<Event>
+            rowKey="event_id"
+            columns={eventColumns}
+            dataSource={events}
+            loading={eventsLoading}
+            scroll={{ x: 900 }}
+            pagination={{ pageSize: 20, showSizeChanger: true }}
+          />
+        </div>
       ),
     },
     {

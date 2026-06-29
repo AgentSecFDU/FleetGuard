@@ -3,10 +3,10 @@
 from datetime import datetime, timezone
 from sqlalchemy import String, Integer, DateTime, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from fleetguard.models.base import Base, TimestampMixin
+from fleetguard.models.base import Base, UpdatedAtMixin
 
 
-class Policy(Base, TimestampMixin):
+class Policy(Base, UpdatedAtMixin):
     __tablename__ = "policies"
 
     policy_id: Mapped[str] = mapped_column(String(255), nullable=False, index=True)

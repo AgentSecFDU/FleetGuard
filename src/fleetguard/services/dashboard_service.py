@@ -95,7 +95,9 @@ async def get_top_risky_devices(db: AsyncSession, limit: int = 10) -> list[dict]
             Event.device_id,
             func.avg(Event.risk_score).label("avg_score"),
             func.count(Event.id).label("total"),
-            func.sum(Event.severity == "critical").label("critical_count"),
+            func.sum(
+                func.case((Event.severity == "critical", 1), else_=0)
+            ).label("critical_count"),
         )
         .group_by(Event.device_id)
         .order_by(func.avg(Event.risk_score).desc())

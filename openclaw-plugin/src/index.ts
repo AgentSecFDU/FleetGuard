@@ -68,33 +68,35 @@ export default {
     };
   },
 
-  async register(api: any) {
+  register(api: any) {
     // Initialize Sidecar client
     const client = new SidecarClient(SIDECAR_URL);
 
-    // Verify Sidecar connectivity on startup
-    let pluginActive = true;
-    try {
-      const status = await client.getStatus();
-      console.log(
-        `[${PLUGIN_NAME}] v${PLUGIN_VERSION} loaded — ` +
-        `Sidecar: device=${status.device_id}, status=${status.status}`
-      );
-    } catch {
-      console.warn(`[${PLUGIN_NAME}] ⚠️  Sidecar not reachable at ${SIDECAR_URL} — governance disabled`);
-      pluginActive = false;
-    }
+    // Active flag: set to true after Sidecar connectivity is confirmed.
+    // Hook handlers check this before processing.
+    let pluginActive = false;
 
-    // Report plugin_loaded to Sidecar
-    if (pluginActive) {
-      await client.submitEvent({
-        event_type: 'plugin_loaded',
-        params_summary: `FleetGuard Plugin v${PLUGIN_VERSION} loaded`,
-        risk_score: 0,
-        risk_labels: [],
-        content_uploaded: false,
-      }).catch(() => {});
-    }
+    // Fire-and-forget async init — must NOT block register().
+    void (async () => {
+      try {
+        const status = await client.getStatus();
+        pluginActive = true;
+        console.log(
+          `[${PLUGIN_NAME}] v${PLUGIN_VERSION} loaded — ` +
+          `Sidecar: device=${status.device_id}, status=${status.status}`
+        );
+        // Report plugin_loaded
+        await client.submitEvent({
+          event_type: 'plugin_loaded',
+          params_summary: `FleetGuard Plugin v${PLUGIN_VERSION} loaded`,
+          risk_score: 0,
+          risk_labels: [],
+          content_uploaded: false,
+        }).catch(() => {});
+      } catch {
+        console.warn(`[${PLUGIN_NAME}] ⚠️  Sidecar not reachable at ${SIDECAR_URL} — governance disabled`);
+      }
+    })();
 
     // ── Hook: before_tool_call ──────────────────────────────────
     api.on('before_tool_call', async (event: any, ctx: any) => {

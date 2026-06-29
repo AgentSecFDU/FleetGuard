@@ -96,10 +96,25 @@ else
 fi
 echo ""
 
+# ── 启动 OpenClaw Gateway（后台） ───────────────────────────────────
+GATEWAY_PID=""
+if [ "$OC_CONFIGURED" = true ]; then
+  echo -e "${GREEN}→ 启动 OpenClaw Gateway...${NC}"
+  openclaw gateway &
+  GATEWAY_PID=$!
+  sleep 2
+  if kill -0 $GATEWAY_PID 2>/dev/null; then
+    echo -e "${GREEN}  ✅ OpenClaw Gateway 已启动 (PID: $GATEWAY_PID)${NC}"
+  else
+    echo -e "${YELLOW}  ⚠️  Gateway 启动失败，请手动运行 openclaw gateway${NC}"
+  fi
+fi
+echo ""
+
 # ── 构建状态信息 ────────────────────────────────────────────────────
 if [ "$OC_CONFIGURED" = true ]; then
-  OC_LINE1="OpenClaw:   ✅ 已配置"
-  OC_LINE2="  启动: openclaw gateway start"
+  OC_LINE1="OpenClaw:   ✅ Gateway 已启动（自动）"
+  OC_LINE2="  聊天: openclaw chat"
 else
   OC_LINE1="OpenClaw:   ⚠️  未配置"
   OC_LINE2="  配置: openclaw onboard"
@@ -125,8 +140,7 @@ echo ""
 echo "容器运行中。docker exec -it <容器名> bash 进入。"
 echo ""
 
-# Keep container alive even if sidecar exits (for debugging)
-# Restart sidecar if it dies
+# Keep container alive; restart sidecar or gateway if they die
 while true; do
   if ! kill -0 $SIDECAR_PID 2>/dev/null; then
     echo "⚠️  Sidecar stopped, restarting in 5s..."
@@ -135,6 +149,12 @@ while true; do
     export PYTHONPATH="/opt/fleetguard/sidecar/src:$PYTHONPATH"
     uv run python -m fleetguard_sidecar.main --api-port 18900 &
     SIDECAR_PID=$!
+  fi
+  if [ -n "$GATEWAY_PID" ] && ! kill -0 $GATEWAY_PID 2>/dev/null; then
+    echo "⚠️  OpenClaw Gateway stopped, restarting in 5s..."
+    sleep 5
+    openclaw gateway &
+    GATEWAY_PID=$!
   fi
   sleep 10
 done

@@ -25,6 +25,10 @@ if [ -z "$FG_DEVICE_ID" ]; then
   export FG_DEVICE_ID="fg-dev-$(hostname)-$(date +%s | tail -c5)"
 fi
 
+# ── 重建 Plugin 符号链接（volume 挂载会覆盖 /root/.openclaw）──
+mkdir -p /root/.openclaw/extensions
+ln -sf /opt/fleetguard-plugin /root/.openclaw/extensions/fleetguard
+
 echo -e "${YELLOW}  Control Center: ${FG_CONTROL_CENTER_URL}${NC}"
 echo -e "${YELLOW}  Device ID:      ${FG_DEVICE_ID}${NC}"
 echo ""

@@ -25,6 +25,7 @@ Thumbs.db
 .ruff_cache/
 *.log
 *.db
+data/
 file::memory:
 
 # Node (stray root installs)

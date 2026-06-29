@@ -83,6 +83,9 @@ services:
       - api
     stdin_open: true    # docker exec 需要
     tty: true           # docker exec 需要
+    volumes:
+      - ./data/alice-openclaw:/root/.openclaw
+      - ./data/alice-fleetguard:/root/.fleetguard
 
   # ── 员工 Bob ──────────────────────────────────────────────────
   employee-bob:
@@ -106,6 +109,9 @@ services:
       - api
     stdin_open: true
     tty: true
+    volumes:
+      - ./data/bob-openclaw:/root/.openclaw
+      - ./data/bob-fleetguard:/root/.fleetguard
 
   # ── 员工 Carol ────────────────────────────────────────────────
   employee-carol:
@@ -129,6 +135,9 @@ services:
       - api
     stdin_open: true
     tty: true
+    volumes:
+      - ./data/carol-openclaw:/root/.openclaw
+      - ./data/carol-fleetguard:/root/.fleetguard
 
 volumes:
   pgdata:

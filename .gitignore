@@ -30,8 +30,8 @@ file::memory:
 
 # Node (stray root installs)
 node_modules/
-package.json
-package-lock.json
+/package.json
+/package-lock.json
 
 # Frontend
 frontend/dist/

@@ -10,9 +10,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from sqlalchemy import select
-from afc.database import async_session_factory, engine
-from afc.models import Base, AdminUser, EnrollmentToken, Policy
-from afc.utils.crypto import hash_password, hash_token
+from agentfleetcontrol.database import async_session_factory, engine
+from agentfleetcontrol.models import Base, AdminUser, EnrollmentToken, Policy
+from agentfleetcontrol.utils.crypto import hash_password, hash_token
 
 
 async def seed():

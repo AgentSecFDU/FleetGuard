@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FleetGuard — Centralized Runtime Governance for AI Agent Fleets</title>
+<title>AFC — Centralized Runtime Governance for AI Agent Fleets</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -25,11 +25,11 @@
 <!-- ── Nav ──────────────────────────────────────────────────────── -->
 <nav class="fixed top-0 w-full bg-white/80 backdrop-blur border-b border-slate-200 z-50">
   <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-    <span class="font-bold text-lg text-brand-700">FleetGuard</span>
+    <span class="font-bold text-lg text-brand-700">AFC</span>
     <div class="flex gap-6 text-sm text-slate-600">
       <a href="#features" class="hover:text-brand-600 transition-colors">Features</a>
       <a href="#architecture" class="hover:text-brand-600 transition-colors">Architecture</a>
-      <a href="https://github.com/AgentSecFDU/FleetGuard" class="hover:text-brand-600 transition-colors">GitHub</a>
+      <a href="https://github.com/AgentSecFDU/AFC" class="hover:text-brand-600 transition-colors">GitHub</a>
     </div>
   </div>
 </nav>
@@ -45,12 +45,12 @@
       <span class="text-slate-900">for Local AI Agent Fleets</span>
     </h1>
     <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-8 leading-relaxed">
-      FleetGuard is an enterprise management platform that brings AI agents under centralized control.
+      AFC is an enterprise management platform that brings AI agents under centralized control.
       Intercept dangerous tool calls, enforce policies, detect prompt injection, audit every action —
       <strong>before</strong> damage happens.
     </p>
     <div class="flex justify-center gap-4">
-      <a href="https://github.com/AgentSecFDU/FleetGuard" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
+      <a href="https://github.com/AgentSecFDU/AFC" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         View on GitHub
       </a>
@@ -64,7 +64,7 @@
 <!-- ── Features ─────────────────────────────────────────────────── -->
 <section id="features" class="py-20 px-6 bg-white border-y border-slate-200">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12">What FleetGuard Does</h2>
+    <h2 class="text-3xl font-bold text-center mb-12">What AFC Does</h2>
     <div class="grid md:grid-cols-3 gap-8">
 
       <div class="p-6 rounded-xl border border-slate-200 hover:border-brand-500 transition-colors">
@@ -133,10 +133,10 @@
         <rect x="25" y="50" width="220" height="65" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
         <text x="135" y="70" text-anchor="middle" fill="#1d4ed8" font-weight="600">OpenClaw Gateway</text>
         <rect x="45" y="80" width="180" height="25" rx="4" fill="#dbeafe"/>
-        <text x="135" y="97" text-anchor="middle" fill="#1e40af" font-size="11">+ FleetGuard Plugin</text>
+        <text x="135" y="97" text-anchor="middle" fill="#1e40af" font-size="11">+ AFC Plugin</text>
 
         <rect x="25" y="125" width="220" height="55" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-        <text x="135" y="145" text-anchor="middle" fill="#166534" font-weight="600">FleetGuard Sidecar</text>
+        <text x="135" y="145" text-anchor="middle" fill="#166534" font-weight="600">AFC Sidecar</text>
         <text x="135" y="165" text-anchor="middle" fill="#166534" font-size="10">Policy cache · Event queue · Heartbeat</text>
 
         <text x="25" y="210" fill="#94a3b8" font-size="10">localhost:18900 ← Plugin calls Sidecar</text>
@@ -159,7 +159,7 @@
 
         <!-- Control Center -->
         <rect x="370" y="40" width="440" height="280" rx="12" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
-        <text x="590" y="65" text-anchor="middle" fill="#6366f1" font-weight="700" font-size="14">FleetGuard Control Center</text>
+        <text x="590" y="65" text-anchor="middle" fill="#6366f1" font-weight="700" font-size="14">AFC Control Center</text>
 
         <rect x="390" y="85" width="190" height="45" rx="6" fill="#faf5ff" stroke="#c4b5fd" stroke-width="1"/>
         <text x="485" y="102" text-anchor="middle" fill="#7c3aed" font-weight="600">API Server</text>
@@ -205,7 +205,7 @@
 <section class="py-20 px-6 bg-white border-y border-slate-200">
   <div class="max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold text-center mb-4">Threat Model</h2>
-    <p class="text-center text-slate-500 mb-12">Five attack surfaces that FleetGuard protects against</p>
+    <p class="text-center text-slate-500 mb-12">Five attack surfaces that AFC protects against</p>
     <div class="grid md:grid-cols-5 gap-4">
       <div class="text-center p-4">
         <div class="text-2xl mb-2">🪝</div>
@@ -241,12 +241,12 @@
   <div class="max-w-2xl mx-auto text-center">
     <h2 class="text-3xl font-bold mb-4">Open Source & Research</h2>
     <p class="text-slate-500 mb-8 leading-relaxed">
-      FleetGuard is a research prototype from Fudan University. The code is open source under MIT license.
+      AFC is a research prototype from Fudan University. The code is open source under MIT license.
       A paper describing the system design and threat model is forthcoming on arXiv.
     </p>
     <div class="flex justify-center gap-4">
-      <a href="https://github.com/AgentSecFDU/FleetGuard" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">GitHub Repository</a>
-      <a href="https://github.com/AgentSecFDU/FleetGuard#readme" class="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-100 transition-colors">Documentation</a>
+      <a href="https://github.com/AgentSecFDU/AFC" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">GitHub Repository</a>
+      <a href="https://github.com/AgentSecFDU/AFC#readme" class="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-100 transition-colors">Documentation</a>
     </div>
     <p class="mt-6 text-sm text-slate-400">
       Maintained by <a href="https://github.com/AgentSecFDU" class="text-brand-600 hover:underline">AgentSecFDU</a>
@@ -258,7 +258,7 @@
 <!-- ── Footer ────────────────────────────────────────────────────── -->
 <footer class="py-8 px-6 border-t border-slate-200 bg-white">
   <div class="max-w-6xl mx-auto text-center text-sm text-slate-400">
-    FleetGuard &copy; 2026 &middot; Fudan University &middot; MIT License
+    AFC &copy; 2026 &middot; Fudan University &middot; MIT License
   </div>
 </footer>
 

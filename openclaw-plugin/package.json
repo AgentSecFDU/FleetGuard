@@ -1,7 +1,7 @@
 {
-  "name": "fleetguard-openclaw-plugin",
+  "name": "afc-openclaw-plugin",
   "version": "0.1.0",
-  "description": "FleetGuard Plugin for OpenClaw Gateway — intercepts and governs AI agent tool calls",
+  "description": "AFC Plugin for OpenClaw Gateway — intercepts and governs AI agent tool calls",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {

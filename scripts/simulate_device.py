@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FleetGuard Device Simulator — mimics a FleetGuard Sidecar + Plugin.
+AgentFleetControl Device Simulator — mimics a AgentFleetControl Sidecar + Plugin.
 
 Usage:
   python scripts/simulate_device.py [--device-id DEVICE_ID] [--hostname HOSTNAME]
@@ -94,7 +94,7 @@ def make_event(base: dict, device_id: str, hostname: str, username: str, session
 
 
 class DeviceSimulator:
-    """Simulates a FleetGuard-managed device."""
+    """Simulates a AgentFleetControl-managed device."""
 
     def __init__(self, device_id: str, hostname: str, username: str, os_name: str,
                  api_url: str, enrollment_token: str | None = None,
@@ -239,8 +239,8 @@ class DeviceSimulator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="FleetGuard Device Simulator")
-    parser.add_argument("--device-id", default=f"fg-dev-{uuid.uuid4().hex[:8]}")
+    parser = argparse.ArgumentParser(description="AgentFleetControl Device Simulator")
+    parser.add_argument("--device-id", default=f"afc-dev-{uuid.uuid4().hex[:8]}")
     parser.add_argument("--hostname", default=f"sim-{random.choice(['alice-macbook', 'bob-thinkpad', 'carol-desktop'])}")
     parser.add_argument("--username", default=random.choice(["alice", "bob", "carol"]))
     parser.add_argument("--os", default=random.choice(["macOS", "Linux", "Windows"]))

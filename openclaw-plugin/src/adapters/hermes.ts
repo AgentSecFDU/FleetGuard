@@ -1,5 +1,5 @@
 /**
- * HermesAdapter — Hermes Agent runtime integration for FleetGuard.
+ * HermesAdapter — Hermes Agent runtime integration for AgentFleetControl.
  *
  * Placeholder: implement when Hermes Agent's hook/plugin API is defined.
  * Follows the same AgentRuntimeAdapter interface.
@@ -12,15 +12,15 @@ import type {
   AgentRuntimeAdapter, BeforeToolCallResult,
   MessageReceivedResult, BeforeInstallResult,
 } from './interface.js';
-import { FleetGuardPlugin } from '../core/plugin.js';
+import { AgentFleetControlPlugin } from '../core/plugin.js';
 
 export class HermesAdapter implements AgentRuntimeAdapter {
   readonly name = 'hermes';
   readonly version = '0.1.0';
 
-  private plugin: FleetGuardPlugin;
+  private plugin: AgentFleetControlPlugin;
 
-  constructor(plugin: FleetGuardPlugin) {
+  constructor(plugin: AgentFleetControlPlugin) {
     this.plugin = plugin;
   }
 
@@ -46,7 +46,7 @@ export class HermesAdapter implements AgentRuntimeAdapter {
 
   async load(): Promise<void> {
     await this.plugin.initialize();
-    console.log(`[fleetguard] HermesAdapter loaded`);
+    console.log(`[agentfleetcontrol] HermesAdapter loaded`);
     // TODO: register hooks with Hermes runtime when its API is defined
   }
 

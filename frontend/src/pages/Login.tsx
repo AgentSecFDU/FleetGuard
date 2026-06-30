@@ -68,7 +68,7 @@ export default function LoginPage() {
             style={{ fontSize: 48, color: '#1677ff', marginBottom: 12 }}
           />
           <Title level={2} style={{ marginBottom: 4 }}>
-            FleetGuard
+            AgentFleetControl
           </Title>
           <Text type="secondary">Endpoint Security Management</Text>
         </div>

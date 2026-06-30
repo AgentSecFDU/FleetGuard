@@ -1,7 +1,7 @@
 [project]
-name = "fleetguard-sidecar"
+name = "afc-sidecar"
 version = "0.1.0"
-description = "FleetGuard Sidecar — Local device agent for endpoint governance"
+description = "AFC Sidecar — Local device agent for endpoint governance"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",

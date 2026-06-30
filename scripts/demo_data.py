@@ -10,10 +10,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from sqlalchemy import select
-from fleetguard.database import async_session_factory, engine
-from fleetguard.models import Base, Device, Event, Approval
-from fleetguard.utils.crypto import hash_token
-from fleetguard.utils.id_generator import generate_device_id, generate_event_id, generate_approval_id
+from agentfleetcontrol.database import async_session_factory, engine
+from agentfleetcontrol.models import Base, Device, Event, Approval
+from agentfleetcontrol.utils.crypto import hash_token
+from agentfleetcontrol.utils.id_generator import generate_device_id, generate_event_id, generate_approval_id
 
 
 DEVICES = [

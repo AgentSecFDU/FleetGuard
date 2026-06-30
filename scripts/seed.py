@@ -10,9 +10,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from sqlalchemy import select
-from fleetguard.database import async_session_factory, engine
-from fleetguard.models import Base, AdminUser, EnrollmentToken, Policy
-from fleetguard.utils.crypto import hash_password, hash_token
+from afc.database import async_session_factory, engine
+from afc.models import Base, AdminUser, EnrollmentToken, Policy
+from afc.utils.crypto import hash_password, hash_token
 
 
 async def seed():
@@ -33,7 +33,7 @@ async def seed():
             print("✅ Created admin user (admin / admin123)")
 
         # Enrollment token
-        raw_token = "fget_demo-enrollment-token-for-testing-00000000"
+        raw_token = "afcet_demo-enrollment-token-for-testing-00000000"
         result = await db.execute(select(EnrollmentToken).where(EnrollmentToken.token_prefix == raw_token[:12]))
         if not result.scalar_one_or_none():
             tok = EnrollmentToken(

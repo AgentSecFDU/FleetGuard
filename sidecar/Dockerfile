@@ -16,4 +16,4 @@ COPY policies/ ./policies/
 RUN uv sync
 
 # Default command
-ENTRYPOINT ["uv", "run", "python", "-m", "fleetguard_sidecar.main"]
+ENTRYPOINT ["uv", "run", "python", "-m", "afc_sidecar.main"]

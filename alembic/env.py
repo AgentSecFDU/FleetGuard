@@ -8,8 +8,8 @@ from sqlalchemy.ext.asyncio import create_async_engine
 
 from alembic import context
 
-from fleetguard.config import settings
-from fleetguard.models import Base
+from agentfleetcontrol.config import settings
+from agentfleetcontrol.models import Base
 
 # Alembic Config object
 config = context.config

@@ -1,5 +1,5 @@
 /**
- * HTTP client for communicating with the local FleetGuard Sidecar.
+ * HTTP client for communicating with the local AgentFleetControl Sidecar.
  *
  * The Sidecar runs on localhost:18900 by default and exposes:
  *   GET  /local/status
@@ -22,7 +22,7 @@ export class SidecarClient {
   private baseUrl: string;
 
   constructor(baseUrl?: string) {
-    this.baseUrl = baseUrl || process.env.FG_SIDECAR_URL || DEFAULT_SIDECAR_URL;
+    this.baseUrl = baseUrl || process.env.AFC_SIDECAR_URL || DEFAULT_SIDECAR_URL;
   }
 
   /** Send an event to the Sidecar and get a policy decision back. */

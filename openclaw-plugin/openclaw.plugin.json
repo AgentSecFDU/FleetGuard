@@ -1,7 +1,7 @@
 {
-  "id": "fleetguard",
-  "name": "FleetGuard",
-  "description": "FleetGuard AI governance plugin — intercepts tool calls, scans for prompt injection, detects secrets in messages, and enforces security policies via local Sidecar.",
+  "id": "agentfleetcontrol",
+  "name": "AgentFleetControl",
+  "description": "AFC governance plugin — intercepts tool calls, scans for prompt injection, detects secrets in messages, and enforces security policies via local Sidecar.",
   "activation": {
     "onStartup": true
   },
@@ -12,7 +12,7 @@
     "properties": {
       "enabled": {
         "type": "boolean",
-        "description": "Enable FleetGuard governance hooks."
+        "description": "Enable AFC governance hooks."
       }
     }
   }

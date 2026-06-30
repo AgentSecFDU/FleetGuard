@@ -1,5 +1,5 @@
 # ────────────────────────────────────────────────────────────────────
-# FleetGuard — 本地实验环境
+# AgentFleetControl — 本地实验环境
 #
 # 启动后你会得到：
 #   - 1 个管控端（API + 前端）
@@ -7,31 +7,31 @@
 #
 # 使用：
 #   docker compose up -d --build
-#   docker exec -it fleetguard-employee-alice bash   # 进入员工 A 的电脑
+#   docker exec -it afc-employee-alice bash   # 进入员工 A 的电脑
 # ────────────────────────────────────────────────────────────────────
 
 services:
   # ── 基础设施 ──────────────────────────────────────────────────
   postgres:
     image: postgres:16-alpine
-    container_name: fleetguard-postgres
+    container_name: afc-postgres
     environment:
-      POSTGRES_USER: fleetguard
-      POSTGRES_PASSWORD: fleetguard
-      POSTGRES_DB: fleetguard
+      POSTGRES_USER: afc
+      POSTGRES_PASSWORD: afc
+      POSTGRES_DB: afc
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U fleetguard"]
+      test: ["CMD-SHELL", "pg_isready -U afc"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: fleetguard-redis
+    container_name: afc-redis
     ports:
       - "6379:6379"
     healthcheck:
@@ -45,11 +45,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fleetguard-api
+    container_name: afc-api
     environment:
-      DATABASE_URL: postgresql+asyncpg://fleetguard:fleetguard@postgres:5432/fleetguard
+      DATABASE_URL: postgresql+asyncpg://afc:afc@postgres:5432/afc
       REDIS_URL: redis://redis:6379/0
-      JWT_SECRET: fleetguard-demo-secret-key-not-for-production
+      JWT_SECRET: afc-demo-secret-key-not-for-production
       CORS_ORIGINS: http://localhost:5173,http://localhost:3000
       DEBUG: "false"
       LOG_LEVEL: INFO
@@ -66,14 +66,14 @@ services:
     build:
       context: .
       dockerfile: docker/employee/Dockerfile
-    container_name: fleetguard-employee-alice
+    container_name: afc-employee-alice
     environment:
-      FG_CONTROL_CENTER_URL: http://api:8000
-      FG_ENROLLMENT_TOKEN: fget_demo-token-for-local-dev-0000000000
-      FG_DEVICE_ID: fg-dev-alice-001
-      FG_HOSTNAME: alice-macbook
-      FG_USERNAME: alice
-      FG_OS: macOS
+      AFC_CONTROL_CENTER_URL: http://api:8000
+      AFC_ENROLLMENT_TOKEN: afcet_demo-token-for-local-dev-0000000000
+      AFC_DEVICE_ID: afc-dev-alice-001
+      AFC_HOSTNAME: alice-macbook
+      AFC_USERNAME: alice
+      AFC_OS: macOS
       # ── OpenClaw 配置（可选，取消注释并填入你的 API Key）──
       # OPENCLAW_PROVIDER: openrouter
       # OPENCLAW_API_KEY: sk-or-...
@@ -85,21 +85,21 @@ services:
     tty: true           # docker exec 需要
     volumes:
       - ./data/alice-openclaw:/root/.openclaw
-      - ./data/alice-fleetguard:/root/.fleetguard
+      - ./data/alice-afc:/root/.afc
 
   # ── 员工 Bob ──────────────────────────────────────────────────
   employee-bob:
     build:
       context: .
       dockerfile: docker/employee/Dockerfile
-    container_name: fleetguard-employee-bob
+    container_name: afc-employee-bob
     environment:
-      FG_CONTROL_CENTER_URL: http://api:8000
-      FG_ENROLLMENT_TOKEN: fget_demo-token-for-local-dev-0000000000
-      FG_DEVICE_ID: fg-dev-bob-001
-      FG_HOSTNAME: bob-thinkpad
-      FG_USERNAME: bob
-      FG_OS: Linux
+      AFC_CONTROL_CENTER_URL: http://api:8000
+      AFC_ENROLLMENT_TOKEN: afcet_demo-token-for-local-dev-0000000000
+      AFC_DEVICE_ID: afc-dev-bob-001
+      AFC_HOSTNAME: bob-thinkpad
+      AFC_USERNAME: bob
+      AFC_OS: Linux
       # ── OpenClaw 配置（可选，取消注释并填入你的 API Key）──
       # OPENCLAW_PROVIDER: openrouter
       # OPENCLAW_API_KEY: sk-or-...
@@ -111,21 +111,21 @@ services:
     tty: true
     volumes:
       - ./data/bob-openclaw:/root/.openclaw
-      - ./data/bob-fleetguard:/root/.fleetguard
+      - ./data/bob-afc:/root/.afc
 
   # ── 员工 Carol ────────────────────────────────────────────────
   employee-carol:
     build:
       context: .
       dockerfile: docker/employee/Dockerfile
-    container_name: fleetguard-employee-carol
+    container_name: afc-employee-carol
     environment:
-      FG_CONTROL_CENTER_URL: http://api:8000
-      FG_ENROLLMENT_TOKEN: fget_demo-token-for-local-dev-0000000000
-      FG_DEVICE_ID: fg-dev-carol-001
-      FG_HOSTNAME: carol-desktop
-      FG_USERNAME: carol
-      FG_OS: Windows
+      AFC_CONTROL_CENTER_URL: http://api:8000
+      AFC_ENROLLMENT_TOKEN: afcet_demo-token-for-local-dev-0000000000
+      AFC_DEVICE_ID: afc-dev-carol-001
+      AFC_HOSTNAME: carol-desktop
+      AFC_USERNAME: carol
+      AFC_OS: Windows
       # ── OpenClaw 配置（可选，取消注释并填入你的 API Key）──
       # OPENCLAW_PROVIDER: openrouter
       # OPENCLAW_API_KEY: sk-or-...
@@ -137,7 +137,7 @@ services:
     tty: true
     volumes:
       - ./data/carol-openclaw:/root/.openclaw
-      - ./data/carol-fleetguard:/root/.fleetguard
+      - ./data/carol-afc:/root/.afc
 
 volumes:
   pgdata:

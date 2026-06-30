@@ -39,7 +39,7 @@ async def test_create_enrollment_token(client: AsyncClient, admin_token):
     assert resp.status_code == 200
     data = resp.json()
     assert "token" in data
-    assert data["token"].startswith("fget_")
+    assert data["token"].startswith("afcet_")
     assert "token_prefix" in data
     assert "expires_at" in data
 
@@ -49,7 +49,7 @@ async def test_device_enroll(client: AsyncClient, enrollment_token):
     """Test device enrollment with valid token."""
     resp = await client.post("/api/v1/devices/enroll", json={
         "enrollment_token": enrollment_token,
-        "device_id": "fg-dev-unique-001",
+        "device_id": "afc-dev-unique-001",
         "hostname": "alice-macbook",
         "os": "macOS",
         "os_version": "15.0",
@@ -60,9 +60,9 @@ async def test_device_enroll(client: AsyncClient, enrollment_token):
     })
     assert resp.status_code == 200
     data = resp.json()
-    assert data["device_id"] == "fg-dev-unique-001"
+    assert data["device_id"] == "afc-dev-unique-001"
     assert "device_token" in data
-    assert data["device_token"].startswith("fgdt_")
+    assert data["device_token"].startswith("afcdt_")
 
 
 @pytest.mark.asyncio
@@ -71,7 +71,7 @@ async def test_device_enroll_duplicate(client: AsyncClient, enrollment_token):
     # First enrollment
     resp = await client.post("/api/v1/devices/enroll", json={
         "enrollment_token": enrollment_token,
-        "device_id": "fg-dev-dup-001",
+        "device_id": "afc-dev-dup-001",
         "hostname": "dup-macbook",
         "os": "macOS",
         "username": "dupuser",
@@ -81,7 +81,7 @@ async def test_device_enroll_duplicate(client: AsyncClient, enrollment_token):
     # Duplicate - should fail (enrollment token is already used)
     resp = await client.post("/api/v1/devices/enroll", json={
         "enrollment_token": enrollment_token,
-        "device_id": "fg-dev-dup-002",
+        "device_id": "afc-dev-dup-002",
         "hostname": "dup2-macbook",
         "os": "macOS",
         "username": "dupuser2",
@@ -95,7 +95,7 @@ async def test_device_heartbeat(client: AsyncClient, device_token):
     resp = await client.post(
         "/api/v1/devices/heartbeat",
         json={
-            "device_id": "fg-dev-test-001",
+            "device_id": "afc-dev-test-001",
             "status": "online",
             "current_sessions": 2,
             "active_agent_runs": 1,
@@ -127,12 +127,12 @@ async def test_list_devices(client: AsyncClient, admin_token, device_token):
 async def test_get_device_detail(client: AsyncClient, admin_token, device_token):
     """Test admin can get device detail."""
     resp = await client.get(
-        "/api/v1/devices/fg-dev-test-001",
+        "/api/v1/devices/afc-dev-test-001",
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     assert resp.status_code == 200
     data = resp.json()
-    assert data["device_id"] == "fg-dev-test-001"
+    assert data["device_id"] == "afc-dev-test-001"
     assert data["hostname"] == "test-macbook"
 
 
@@ -140,7 +140,7 @@ async def test_get_device_detail(client: AsyncClient, admin_token, device_token)
 async def test_quarantine_device(client: AsyncClient, admin_token, device_token):
     """Test admin can quarantine a device."""
     resp = await client.post(
-        "/api/v1/devices/fg-dev-test-001/quarantine",
+        "/api/v1/devices/afc-dev-test-001/quarantine",
         json={"reason": "Suspicious activity detected"},
         headers={"Authorization": f"Bearer {admin_token}"},
     )
@@ -155,13 +155,13 @@ async def test_unquarantine_device(client: AsyncClient, admin_token, device_toke
     """Test admin can unquarantine a device."""
     # First quarantine
     await client.post(
-        "/api/v1/devices/fg-dev-test-001/quarantine",
+        "/api/v1/devices/afc-dev-test-001/quarantine",
         json={"reason": "Test quarantine"},
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     # Then unquarantine
     resp = await client.post(
-        "/api/v1/devices/fg-dev-test-001/unquarantine",
+        "/api/v1/devices/afc-dev-test-001/unquarantine",
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     assert resp.status_code == 200

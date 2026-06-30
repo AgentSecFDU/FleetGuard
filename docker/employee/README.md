@@ -1,6 +1,6 @@
-# FleetGuard Employee Machine
+# AgentFleetControl Employee Machine
 
-预装完整的员工工作环境：OpenClaw + FleetGuard Sidecar + FleetGuard Plugin。
+预装完整的员工工作环境：OpenClaw + AgentFleetControl Sidecar + AgentFleetControl Plugin。
 
 ## 预装组件
 
@@ -9,8 +9,8 @@
 | Node.js 24 | 系统安装 | OpenClaw 运行时 |
 | Python 3.12 | 系统安装 | Sidecar 运行时 |
 | OpenClaw Gateway | `npm install -g openclaw` | AI Agent 网关 |
-| FleetGuard Sidecar | `/opt/fleetguard/sidecar/` | 自动启动，监听 `:18900` |
-| FleetGuard Plugin | `~/.openclaw/extensions/fleetguard` | 已接入 OpenClaw |
+| AgentFleetControl Sidecar | `/opt/afc/sidecar/` | 自动启动，监听 `:18900` |
+| AgentFleetControl Plugin | `~/.openclaw/extensions/afc` | 已接入 OpenClaw |
 
 ## 启动后
 
@@ -18,7 +18,7 @@
 
 进入容器：
 ```bash
-docker exec -it fleetguard-employee-alice bash
+docker exec -it afc-employee-alice bash
 ```
 
 ## 配置 OpenClaw
@@ -57,7 +57,7 @@ vim ~/.openclaw/openclaw.json
 openclaw gateway start
 ```
 
-此后每一次工具调用都会被 FleetGuard Plugin 拦截 → Sidecar 评估 → Control Center 审计。
+此后每一次工具调用都会被 AgentFleetControl Plugin 拦截 → Sidecar 评估 → Control Center 审计。
 
 ## 验证
 

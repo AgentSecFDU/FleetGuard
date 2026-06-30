@@ -35,7 +35,7 @@ export default function AppLayout() {
         style={{ borderRight: `1px solid ${themeToken.colorBorderSecondary}` }}>
         <div style={{ padding: '16px', textAlign: 'center' }}>
           <Text strong style={{ color: '#fff', fontSize: collapsed ? 14 : 18 }}>
-            {collapsed ? 'FG' : 'FleetGuard'}
+            {collapsed ? 'FG' : 'AgentFleetControl'}
           </Text>
         </div>
         <Menu

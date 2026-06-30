@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 # ────────────────────────────────────────────────────────────────────
-# FleetGuard — Zero-dependency local development start
+# Agentfleetcontrol — Zero-dependency local development start
 # ────────────────────────────────────────────────────────────────────
 set -e
 cd "$(dirname "$0")/.."
 
 # Use SQLite — no Docker/PostgreSQL needed
-export DATABASE_URL="sqlite+aiosqlite:///fleetguard.db"
+export DATABASE_URL="sqlite+aiosqlite:///afc.db"
 export REDIS_URL="redis://localhost:6379/0"
-export JWT_SECRET="fleetguard-local-dev-secret-key"
+export JWT_SECRET="afc-local-dev-secret-key"
 export CORS_ORIGINS="http://localhost:5173,http://localhost:3000"
 export DEBUG="true"
 export DEVICE_OFFLINE_THRESHOLD_SECONDS="300"
 
 echo "╔════════════════════════════════════════════╗"
-echo "║   FleetGuard — Local Dev Mode (SQLite)    ║"
+echo "║   Agentfleetcontrol — Local Dev Mode (SQLite)    ║"
 echo "╚════════════════════════════════════════════╝"
 echo ""
 
@@ -22,12 +22,12 @@ echo ""
 echo "[1/2] Setting up database (SQLite)..."
 uv run python -c "
 import asyncio
-from fleetguard.database import engine, async_session_factory
-from fleetguard.models import Base
-from fleetguard.models.admin_user import AdminUser
-from fleetguard.models.policy import Policy
-from fleetguard.models.enrollment_token import EnrollmentToken
-from fleetguard.utils.crypto import hash_password, hash_token
+from afc.database import engine, async_session_factory
+from afc.models import Base
+from afc.models.admin_user import AdminUser
+from afc.models.policy import Policy
+from afc.models.enrollment_token import EnrollmentToken
+from afc.utils.crypto import hash_password, hash_token
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from sqlalchemy import select
@@ -44,7 +44,7 @@ async def setup():
             print('  ✅ Admin user created (admin / admin123)')
 
         # Enrollment token
-        raw = 'fget_demo-token-for-local-dev-0000000000'
+        raw = 'afcet_demo-token-for-local-dev-0000000000'
         r = await db.execute(select(EnrollmentToken).where(EnrollmentToken.token_prefix == raw[:12]))
         if not r.scalar_one_or_none():
             db.add(EnrollmentToken(token_hash=hash_token(raw), token_prefix=raw[:12],
@@ -70,11 +70,11 @@ echo "  ✅ Database ready"
 echo ""
 
 # 2. Start API server
-echo "[2/2] Starting FleetGuard API on http://localhost:8000 ..."
+echo "[2/2] Starting Agentfleetcontrol API on http://localhost:8000 ..."
 echo ""
 echo "  ╔════════════════════════════════════════════╗"
 echo "  ║  API Docs:  http://localhost:8000/docs     ║"
 echo "  ║  Admin:     admin / admin123               ║"
 echo "  ╚════════════════════════════════════════════╝"
 echo ""
-uv run uvicorn fleetguard.main:app --reload --host 0.0.0.0 --port 8000
+uv run uvicorn afc.main:app --reload --host 0.0.0.0 --port 8000

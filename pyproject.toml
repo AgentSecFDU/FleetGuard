@@ -1,7 +1,7 @@
 [project]
-name = "fleetguard"
+name = "agentfleetcontrol"
 version = "0.1.0"
-description = "FleetGuard - Centralized Runtime Governance for Local AI Agent Fleets"
+description = "AgentFleetControl (AFC) - Centralized Runtime Governance for Local AI Agent Fleets"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",

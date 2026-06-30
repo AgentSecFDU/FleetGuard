@@ -1,12 +1,12 @@
 /**
- * FleetGuardPlugin — runtime-agnostic governance core.
+ * AgentFleetControlPlugin — runtime-agnostic governance core.
  *
  * This is the central engine shared across all agent runtime adapters.
  * It owns: session state, sidecar communication, tool classification,
  * parameter redaction, and the governance decision pipeline.
  *
  * Usage:
- *   const plugin = new FleetGuardPlugin({ sidecarUrl: "http://127.0.0.1:18900" });
+ *   const plugin = new AgentFleetControlPlugin({ sidecarUrl: "http://127.0.0.1:18900" });
  *   await plugin.initialize();
  *   // Then pass it to an adapter, e.g.:
  *   const adapter = new OpenClawAdapter(plugin);
@@ -30,10 +30,10 @@ export interface PluginConfig {
   sidecarUrl?: string;
 }
 
-const PLUGIN_NAME = 'fleetguard-plugin';
+const PLUGIN_NAME = 'agentfleetcontrol-plugin';
 const PLUGIN_VERSION = '0.1.0';
 
-export class FleetGuardPlugin {
+export class AgentFleetControlPlugin {
   readonly name = PLUGIN_NAME;
   readonly version = PLUGIN_VERSION;
 
@@ -59,7 +59,7 @@ export class FleetGuardPlugin {
     }
     await this.client.submitEvent({
       event_type: 'plugin_loaded',
-      params_summary: `FleetGuard Plugin v${PLUGIN_VERSION} loaded`,
+      params_summary: `AgentFleetControl Plugin v${PLUGIN_VERSION} loaded`,
       risk_score: 0, risk_labels: [], content_uploaded: false,
     }).catch(() => {});
   }

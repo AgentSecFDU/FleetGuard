@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ────────────────────────────────────────────────────────────────────
-# FleetGuard Full Stack Demo
+# Agentfleetcontrol Full Stack Demo
 # ────────────────────────────────────────────────────────────────────
 # Launches:
 #   Docker: PostgreSQL + Redis + API + 3 Sidecars
@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo -e "${CYAN}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║     FleetGuard — Full Stack Demo Launch          ║${NC}"
+echo -e "${CYAN}║     Agentfleetcontrol — Full Stack Demo Launch          ║${NC}"
 echo -e "${CYAN}╚══════════════════════════════════════════════════╝${NC}"
 echo ""
 
@@ -40,7 +40,7 @@ echo ""
 
 # ── Done ───────────────────────────────────────────────────────────
 echo -e "${GREEN}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║  ✅ FleetGuard Demo is running!                  ║${NC}"
+echo -e "${GREEN}║  ✅ Agentfleetcontrol Demo is running!                  ║${NC}"
 echo -e "${GREEN}╠══════════════════════════════════════════════════╣${NC}"
 echo -e "${GREEN}║                                                  ║${NC}"
 echo -e "${GREEN}║  API Docs:  http://localhost:8000/docs           ║${NC}"
@@ -49,9 +49,9 @@ echo -e "${GREEN}║            http://localhost:5173                  ║${NC}"
 echo -e "${GREEN}║  Admin:     admin / admin123                     ║${NC}"
 echo -e "${GREEN}║                                                  ║${NC}"
 echo -e "${GREEN}║  Sidecars:                                       ║${NC}"
-echo -e "${GREEN}║    fleetguard-sidecar-alice (alice-macbook)      ║${NC}"
-echo -e "${GREEN}║    fleetguard-sidecar-bob   (bob-thinkpad)       ║${NC}"
-echo -e "${GREEN}║    fleetguard-sidecar-carol (carol-desktop)      ║${NC}"
+echo -e "${GREEN}║    afc-sidecar-alice (alice-macbook)      ║${NC}"
+echo -e "${GREEN}║    afc-sidecar-bob   (bob-thinkpad)       ║${NC}"
+echo -e "${GREEN}║    afc-sidecar-carol (carol-desktop)      ║${NC}"
 echo -e "${GREEN}║                                                  ║${NC}"
 echo -e "${GREEN}║  Stop:  docker compose down                      ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════════════╝${NC}"

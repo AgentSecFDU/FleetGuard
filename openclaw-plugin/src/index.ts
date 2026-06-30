@@ -1,5 +1,5 @@
 /**
- * FleetGuard Plugin — OpenClaw Governance Plugin
+ * AgentFleetControl Plugin — OpenClaw Governance Plugin
  * ===============================================
  *
  * Uses definePluginEntry-compatible default export with register(api).
@@ -23,9 +23,9 @@ import type {
 
 // ── Plugin Configuration ──────────────────────────────────────────
 
-const PLUGIN_NAME = 'fleetguard-openclaw-plugin';
+const PLUGIN_NAME = 'agentfleetcontrol-openclaw-plugin';
 const PLUGIN_VERSION = '0.1.0';
-const SIDECAR_URL = process.env.FG_SIDECAR_URL || 'http://127.0.0.1:18900';
+const SIDECAR_URL = process.env.AFC_SIDECAR_URL || 'http://127.0.0.1:18900';
 
 // ── Session Management ────────────────────────────────────────────
 
@@ -46,14 +46,14 @@ function getSession(sessionId: string): SessionState {
 }
 
 const PLUGIN_DESCRIPTION =
-  'FleetGuard AI governance plugin — intercepts tool calls, scans for prompt injection, ' +
+  'AgentFleetControl AI governance plugin — intercepts tool calls, scans for prompt injection, ' +
   'detects secrets in messages, and enforces security policies via local Sidecar.';
 
 // ── Default Export ────────────────────────────────────────────────
 
 export default {
-  id: 'fleetguard',
-  name: 'FleetGuard',
+  id: 'agentfleetcontrol',
+  name: 'AgentFleetControl',
   description: PLUGIN_DESCRIPTION,
   get configSchema() {
     return {
@@ -62,7 +62,7 @@ export default {
       properties: {
         enabled: {
           type: 'boolean' as const,
-          description: 'Enable FleetGuard governance hooks.',
+          description: 'Enable AgentFleetControl governance hooks.',
         },
       },
     };
@@ -88,7 +88,7 @@ export default {
         // Report plugin_loaded
         await client.submitEvent({
           event_type: 'plugin_loaded',
-          params_summary: `FleetGuard Plugin v${PLUGIN_VERSION} loaded`,
+          params_summary: `AgentFleetControl Plugin v${PLUGIN_VERSION} loaded`,
           risk_score: 0,
           risk_labels: [],
           content_uploaded: false,

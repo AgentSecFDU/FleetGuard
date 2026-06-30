@@ -5,12 +5,12 @@ import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from fleetguard.main import create_app
-from fleetguard.models import Base
-from fleetguard.utils.crypto import hash_password
-from fleetguard.models.admin_user import AdminUser
-from fleetguard.models.enrollment_token import EnrollmentToken
-from fleetguard.utils.crypto import hash_token
+from agentfleetcontrol.main import create_app
+from agentfleetcontrol.models import Base
+from agentfleetcontrol.utils.crypto import hash_password
+from agentfleetcontrol.models.admin_user import AdminUser
+from agentfleetcontrol.models.enrollment_token import EnrollmentToken
+from agentfleetcontrol.utils.crypto import hash_token
 
 # Use an in-memory SQLite database for tests
 TEST_DATABASE_URL = "sqlite+aiosqlite:///file::memory:?cache=shared"
@@ -45,7 +45,7 @@ def app():
 @pytest_asyncio.fixture
 async def client(app, db_session):
     """Create an async HTTP test client."""
-    from fleetguard.database import get_db
+    from agentfleetcontrol.database import get_db
 
     async def override_get_db():
         yield db_session
@@ -81,7 +81,7 @@ async def admin_token(client, admin_user):
 @pytest_asyncio.fixture
 async def enrollment_token(db_session: AsyncSession, admin_user, client, admin_token):
     """Create an enrollment token for testing."""
-    raw_token = "fget_test_token_for_enrollment_1234567890abcdef"
+    raw_token = "afcet_test_token_for_enrollment_1234567890abcdef"
     tok = EnrollmentToken(
         token_hash=hash_token(raw_token),
         token_prefix=raw_token[:12],
@@ -100,7 +100,7 @@ async def device_token(client, admin_token, enrollment_token):
     """Enroll a test device and return the device token."""
     resp = await client.post("/api/v1/devices/enroll", json={
         "enrollment_token": enrollment_token,
-        "device_id": "fg-dev-test-001",
+        "device_id": "afc-dev-test-001",
         "hostname": "test-macbook",
         "os": "macOS",
         "os_version": "15.0",

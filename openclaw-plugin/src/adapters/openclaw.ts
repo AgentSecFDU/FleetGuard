@@ -1,7 +1,7 @@
 /**
- * OpenClawAdapter — OpenClaw Gateway integration for FleetGuard.
+ * OpenClawAdapter — OpenClaw Gateway integration for AgentFleetControl.
  *
- * Registers FleetGuard hooks with the OpenClaw plugin/extension system.
+ * Registers AgentFleetControl hooks with the OpenClaw plugin/extension system.
  * OpenClaw loads extensions from ~/.openclaw/extensions/.
  *
  * The extension manifest in package.json declares:
@@ -15,15 +15,15 @@ import type {
   AgentRuntimeAdapter, BeforeToolCallResult,
   MessageReceivedResult, BeforeInstallResult,
 } from './interface.js';
-import { FleetGuardPlugin } from '../core/plugin.js';
+import { AgentFleetControlPlugin } from '../core/plugin.js';
 
 export class OpenClawAdapter implements AgentRuntimeAdapter {
   readonly name = 'openclaw';
   readonly version = '0.1.0';
 
-  private plugin: FleetGuardPlugin;
+  private plugin: AgentFleetControlPlugin;
 
-  constructor(plugin: FleetGuardPlugin) {
+  constructor(plugin: AgentFleetControlPlugin) {
     this.plugin = plugin;
   }
 
@@ -52,7 +52,7 @@ export class OpenClawAdapter implements AgentRuntimeAdapter {
     // In production, OpenClaw would call this adapter's hooks via its
     // extension API. The adapter registers handlers matching the
     // extension manifest hooks declared in package.json.
-    console.log(`[fleetguard] OpenClawAdapter loaded — governing tool calls`);
+    console.log(`[agentfleetcontrol] OpenClawAdapter loaded — governing tool calls`);
   }
 
   async unload(): Promise<void> {

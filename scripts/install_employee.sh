@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ────────────────────────────────────────────────────────────────────
-# FleetGuard Employee Sidecar — 一键安装脚本
+# Agentfleetcontrol Employee Sidecar — 一键安装脚本
 # 运行在每台员工电脑上
 # ────────────────────────────────────────────────────────────────────
 set -e
@@ -11,7 +11,7 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo -e "${CYAN}"
 echo "╔══════════════════════════════════════════════════════╗"
-echo "║   FleetGuard Employee Sidecar — 一键安装             ║"
+echo "║   Agentfleetcontrol Employee Sidecar — 一键安装             ║"
 echo "║   员工端，装在每台员工电脑上                           ║"
 echo "╚══════════════════════════════════════════════════════╝"
 echo -e "${NC}"
@@ -62,13 +62,13 @@ read -p "  用户名 (默认: $USERNAME): " DEVICE_USER
 DEVICE_USER=${DEVICE_USER:-$USERNAME}
 
 # Write config
-CONFIG_DIR="$HOME/.fleetguard"
+CONFIG_DIR="$HOME/.afc"
 mkdir -p "$CONFIG_DIR"
 
 python3 -c "
 import json, platform, uuid
 config = {
-    'device_id': f'fg-dev-{uuid.uuid4().hex[:8]}',
+    'device_id': f'afc-dev-{uuid.uuid4().hex[:8]}',
     'hostname': '$DEVICE_HOST',
     'username': '$DEVICE_USER',
     'os_name': platform.system(),
@@ -95,18 +95,18 @@ echo -e "${GREEN}  ✅ 依赖安装完成${NC}"
 # ── Step 3: Start ──────────────────────────────────────────────────
 echo ""
 echo -e "${GREEN}╔══════════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║  ✅ FleetGuard Sidecar 安装完成！                     ║${NC}"
+echo -e "${GREEN}║  ✅ Agentfleetcontrol Sidecar 安装完成！                     ║${NC}"
 echo -e "${GREEN}╠══════════════════════════════════════════════════════╣${NC}"
 echo -e "${GREEN}║                                                      ║${NC}"
 echo -e "${GREEN}║  启动命令:                                            ║${NC}"
 echo -e "${GREEN}║    cd sidecar                                        ║${NC}"
-echo -e "${GREEN}║    uv run python -m fleetguard_sidecar.main           ║${NC}"
+echo -e "${GREEN}║    uv run python -m afc_sidecar.main           ║${NC}"
 echo -e "${GREEN}║                                                      ║${NC}"
 echo -e "${GREEN}║  本地 API: http://127.0.0.1:18900                    ║${NC}"
 echo -e "${GREEN}║  管控端:   $CC_URL                       ║${NC}"
 echo -e "${GREEN}║                                                      ║${NC}"
 echo -e "${GREEN}║  设为开机自启动 (macOS):                              ║${NC}"
-echo -e "${GREEN}║    cp scripts/fleetguard-sidecar.plist                ║${NC}"
+echo -e "${GREEN}║    cp scripts/afc-sidecar.plist                ║${NC}"
 echo -e "${GREEN}║      ~/Library/LaunchAgents/                          ║${NC}"
 echo -e "${GREEN}║                                                      ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════════════════╝${NC}"
@@ -118,5 +118,5 @@ if [ "$START_NOW" != "n" ] && [ "$START_NOW" != "N" ]; then
     echo -e "${YELLOW}  启动 Sidecar... (Ctrl+C 停止)${NC}"
     echo ""
     cd "$PROJECT_DIR/sidecar"
-    exec uv run python -m fleetguard_sidecar.main
+    exec uv run python -m afc_sidecar.main
 fi

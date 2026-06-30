@@ -1,9 +1,9 @@
 """Risk engine unit tests."""
 
 import pytest
-from fleetguard.engine.base import RiskContext, RiskVerdict
-from fleetguard.engine.risk_scorer import RiskScorer
-from fleetguard.engine.rules import get_all_rules
+from agentfleetcontrol.engine.base import RiskContext, RiskVerdict
+from agentfleetcontrol.engine.risk_scorer import RiskScorer
+from agentfleetcontrol.engine.rules import get_all_rules
 
 
 @pytest.fixture

@@ -1,11 +1,11 @@
 # ────────────────────────────────────────────────────────────────────
-# FleetGuard Employee Machine — Docker 镜像
+# AgentFleetControl Employee Machine — Docker 镜像
 #
 # 模拟一台完整的员工电脑，预装：
 #   - Python 3.12 + Node.js 24（OpenClaw 运行环境）
 #   - OpenClaw Gateway（全局安装）
-#   - FleetGuard Sidecar（自动注册 + 心跳）
-#   - FleetGuard Plugin（已接入 OpenClaw 插件目录）
+#   - AgentFleetControl Sidecar（自动注册 + 心跳）
+#   - AgentFleetControl Plugin（已接入 OpenClaw 插件目录）
 # ────────────────────────────────────────────────────────────────────
 FROM ubuntu:24.04
 
@@ -39,17 +39,17 @@ RUN mkdir -p /root/.openclaw/extensions
 # ── OpenClaw 配置模板 ───────────────────────────────────────────────
 COPY docker/employee/openclaw/ /root/.openclaw/
 
-# ── 安装 FleetGuard Sidecar ─────────────────────────────────────────
-COPY sidecar/ /opt/fleetguard/sidecar/
-COPY policies/ /opt/fleetguard/policies/
-WORKDIR /opt/fleetguard/sidecar
+# ── 安装 AgentFleetControl Sidecar ─────────────────────────────────────────
+COPY sidecar/ /opt/afc/sidecar/
+COPY policies/ /opt/afc/policies/
+WORKDIR /opt/afc/sidecar
 RUN uv sync
 
-# ── 编译 FleetGuard Plugin 并接入 OpenClaw ──────────────────────────
-COPY openclaw-plugin/ /opt/fleetguard-plugin/
-WORKDIR /opt/fleetguard-plugin
+# ── 编译 AgentFleetControl Plugin 并接入 OpenClaw ──────────────────────────
+COPY openclaw-plugin/ /opt/afc-plugin/
+WORKDIR /opt/afc-plugin
 RUN npm install && npm run build 2>/dev/null || true
-RUN ln -sf /opt/fleetguard-plugin /root/.openclaw/extensions/fleetguard
+RUN ln -sf /opt/afc-plugin /root/.openclaw/extensions/afc
 
 # ── 入口脚本 ────────────────────────────────────────────────────────
 COPY docker/employee/entrypoint.sh /entrypoint.sh

@@ -2,7 +2,7 @@
  * AgentRuntimeAdapter — unified interface for all agent runtimes.
  *
  * To add a new agent runtime (OpenClaw, Hermes, etc.), implement this
- * interface and pass the adapter to FleetGuardPlugin.register().
+ * interface and pass the adapter to AgentFleetControlPlugin.register().
  */
 
 import type {
@@ -32,7 +32,7 @@ export interface AgentRuntimeAdapter {
 
   /**
    * Called by the runtime before executing a tool.
-   * The adapter is responsible for calling FleetGuardPlugin.onBeforeToolCall().
+   * The adapter is responsible for calling AgentFleetControlPlugin.onBeforeToolCall().
    */
   onBeforeToolCall(ctx: ToolCallContext): Promise<BeforeToolCallResult>;
 

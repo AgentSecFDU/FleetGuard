@@ -1,8 +1,8 @@
-# FleetGuard
+# AgentFleetControl
 
 **Centralized Runtime Governance for Local AI Agent Fleets**
 
-FleetGuard 是一个面向本地 AI Agent 集群的集中式运行时治理系统。它将多台设备上分散运行的 AI Agent（基于 OpenClaw）纳入统一管理，提供：
+AgentFleetControl 是一个面向本地 AI Agent 集群的集中式运行时治理系统。它将多台设备上分散运行的 AI Agent（基于 OpenClaw）纳入统一管理，提供：
 
 - 🔍 **实时监控** — 集中观察每台设备的 agent 行为、工具调用记录
 - 🛡️ **事前拦截** — 在危险工具调用执行前进行阻断
@@ -43,7 +43,7 @@ uv run python scripts/seed.py
 ### 4. 启动 API 服务
 
 ```bash
-uv run uvicorn fleetguard.main:app --reload
+uv run uvicorn afc.main:app --reload
 ```
 
 访问 http://localhost:8000/docs 查看 Swagger API 文档。
@@ -71,7 +71,7 @@ uv run pytest tests/ -v
 ### Demo 注册令牌
 
 ```
-fget_demo-enrollment-token-for-testing-00000000
+afcet_demo-enrollment-token-for-testing-00000000
 ```
 
 ---
@@ -102,8 +102,8 @@ fget_demo-enrollment-token-for-testing-00000000
 ## 项目结构
 
 ```
-fleetguard/
-├── src/fleetguard/
+afc/
+├── src/afc/
 │   ├── main.py              # FastAPI 应用入口
 │   ├── config.py            # 配置管理 (pydantic-settings)
 │   ├── database.py          # 异步数据库引擎

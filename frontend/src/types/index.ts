@@ -1,4 +1,4 @@
-// TypeScript type definitions matching FleetGuard API responses
+// TypeScript type definitions matching AgentFleetControl API responses
 
 // ── Auth ────────────────────────────────────────────────────────
 export interface LoginRequest {

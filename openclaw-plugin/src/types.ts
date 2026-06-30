@@ -1,4 +1,4 @@
-/** Core type definitions for FleetGuard Plugin ↔ Sidecar communication. */
+/** Core type definitions for AgentFleetControl Plugin ↔ Sidecar communication. */
 
 // ── OpenClaw Hook Contexts ────────────────────────────────────────
 
